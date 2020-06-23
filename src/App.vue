@@ -25,13 +25,14 @@ export default {
   methods:{
     getImage(){
 
-      this.axios.get('https://api.pexels.com/v1/search?query=ocean',
+      this.axios.get('https://api.pexels.com/v1/search?query=beach',
         {
           headers: {
              'Authorization': '563492ad6f91700001000001874e43f1cad34bd8a58e48aa7a10da20'
            }
         }).then((response) => {
-          let landscapePhoto = response.data.photos[0].src.landscape
+          let randomPhotoIndex = Math.floor(1 + Math.random() * response.data.photos.length);
+          let landscapePhoto = response.data.photos[randomPhotoIndex].src.landscape
           document.body.style.cssText = "background:  url('"+landscapePhoto+"') no-repeat fixed; background-size: cover;background-position-x: center;";
       })
     }
@@ -51,11 +52,11 @@ body {
   max-width: 42em;
 }
 .footer {
-  position: absolute;
+  position: fixed;
   bottom: 0;
   width: 100%;
-  height: 60px; /* Set the fixed height of the footer here */
-  line-height: 60px; /* Vertically center the text there */
+  height: 30px; /* Set the fixed height of the footer here */
+  line-height: 30px; /* Vertically center the text there */
   background-color: #f5f5f5;
 }
 
